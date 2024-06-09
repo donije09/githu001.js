@@ -39,3 +39,10 @@ body{
     color: #e74c3c;
     font-weight: bold;
 }
+.pokemon-button {
+    margin: 5px;
+    padding: 10px;
+    background-color: lightblue;
+    border: none;
+    cursor: pointer;
+}

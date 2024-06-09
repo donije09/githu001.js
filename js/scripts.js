@@ -13,30 +13,56 @@ let pokemonRepository = (function(){
         {
             name: "jaho",
             height: 4,
-            type: ['sugar', 'light']
+            types: ['sugar', 'light']
     
     
         }
     
     ];
-    return{
-        getAll: function() {
-            return pokemonList;
-        },
-        add: function(pokemon){
-            if (typeof pokemon === 'object' && 'name' in pokemon && 'height' in pokemon && 'types' in pokemon){
-                pokemonList.push(pokemon);
-            } else {
-                console.log('Invalid Pokemon object');
-            }
-        }
-    };
-})();    
-pokemonRepository.getAll().forEach(function(pokemon){
-    let output = pokemon.name + '(height:' + pokemon.height + ')';
 
-    if (pokemon.height > 6.0) {
-        output += "-wow, that's big";
+    function getAll(){
+        return pokemonList;
     }
-    document.write(output + '<br>');
+    function add(pokemon){
+        if (typeof pokemon === 'object' && 'name' in pokemon && 'height' in pokemon && 'types' in pokemon){
+            pokemonList.push(pokemon);
+        } else {
+            console.log('Invalid Pokemon object');
+        }
+
+    }
+            
+        
+
+    function addListItem(pokemon) {
+        let pokemonListElement = document.querySelector('.pokemon-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('pokemon-button');
+        listItem.appendChild(button);
+        pokemonListElement.appendChild(listItem);
+        button.addEventListener('click', function() {
+            showDetails(pokemon);
+
+
+        } );
+        
+    } 
+
+        function showDetails(pokemon){
+            console.log(pokemon);
+        }
+
+        return{
+            getAll: getAll,
+            add: add,
+            addListItem: addListItem
+        };
+})(); 
+
+
+
+pokemonRepository.getAll().forEach(function(pokemon){
+   pokemonRepository.addListItem(pokemon);
 });
