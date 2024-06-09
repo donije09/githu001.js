@@ -18,13 +18,12 @@ let pokemonList = [
     }
 
 ];
-for (let i = 0; i < pokemonList.length; i++){
-    let pokemon = pokemonList[i];
-    let displayString = pokemon.name + '(height: ' + pokemon.height + ')';
-    if (pokemon.height > 6) {
-        displayString += ' - wow, that!\'s big';
-    }
-
-    document.write(displayString + '<br>');
-}
  
+pokemonList.forEach(function(pokemon) {
+    let output = pokemon.name + '(height:' + pokemon.height + ')';
+
+    if (pokemon.height > 6.0) {
+        output += "-wow, that's big";
+    }
+    document.write(output + '<br>');
+});
