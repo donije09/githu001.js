@@ -35,7 +35,7 @@ let pokemonRepository = (function() {
     }
     function showDetails(pokemon){
         loadDetails(pokemon).then(function(){
-        console.log(pokemon);
+        showModal (pokemon);
     });
 
     }
@@ -79,7 +79,7 @@ let pokemonRepository = (function() {
                });
 
         }
-        function loadDetails (){
+        function loadDetails (pokemon){
             showLoadingMessage();
             let url = pokemon.detailsUrl;
             return fetch(url)
@@ -90,14 +90,39 @@ let pokemonRepository = (function() {
                 .then(function (details){
                     hideLoadingMessage();
                     pokemon.imageUrl= details.sprites.front_default;
-                    pokemon.hide =details.height;
+                    pokemon.height = details.height;
                 }) 
                 .catch(function(e){
                     hideLoadingMessage();
                     console.error(e);
             
                }); 
-        }      
+        }
+        
+        function showModal(pokemon){
+            let modal = document.getElementById('pokemonModal');
+            let modalContent = document.querySelector('.modal-content');
+            let span = document.getElementsByClassName('close')[0];
+
+            document.getElementById('pokemonName').innerText = pokemon.name;
+            document.getElementById('pokemonImage').src =pokemon.imageUrl;
+            document.getElementById('pokemonHeight').innerText = `Height: ${pokemon.height}`;
+            modal.style.display ='block';
+            span.onclick = function(){
+                modal.style.display ='none';
+            }
+            window.onclick = function(event){
+                if (event.target == modal){
+                    modal.style.display = 'none';   
+                }
+            }
+            documents.onkeydown = function(event){
+                if (event.key === "Escape"){
+                    modal.display = 'none';
+
+                }
+            }
+        }
 
         return {
             getAll: getAll,
