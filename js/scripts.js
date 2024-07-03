@@ -146,7 +146,7 @@ let pokemonRepository = (function() {
             }
             document.onkeydown = function(event){
                 if (event.key === "Escape"){
-                    modal.display = 'none';
+                    modal.style.display = 'none';
 
                 }
             }
